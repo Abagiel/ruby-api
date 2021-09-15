@@ -13,7 +13,7 @@ class ProjectController < ApplicationController
 
   	Todo.where(id: params[:todoId]).update(isCompleted: !todo.isCompleted)
 
-  	render json: todo.id, status: 200
+  	render json: { todoId: todo.id, isCompleted: !todo.isCompleted }, status: 200
   end
 
   def create
@@ -36,7 +36,7 @@ class ProjectController < ApplicationController
       todo = Todo.create(text: project_params[:text], isCompleted: false, project_id: projectId)
     end
 
-  	render json: todo.id, status: 200
+  	render json: { projectId: projectId, todoId: todo.id }, status: 200
   end
 
   def project_params
